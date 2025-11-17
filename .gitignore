@@ -1,0 +1,10 @@
+## Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+## Arquivos de configuração
+appsettings.json
+appsettings.*.json
+!appsettings.Example.json
