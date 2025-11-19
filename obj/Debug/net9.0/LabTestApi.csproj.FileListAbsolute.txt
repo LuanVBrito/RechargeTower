@@ -130,3 +130,6 @@ C:\Users\luann\source\repos\LabTestApi\LabTestApi\obj\Debug\net9.0\refint\LabTes
 C:\Users\luann\source\repos\LabTestApi\LabTestApi\obj\Debug\net9.0\LabTestApi.pdb
 C:\Users\luann\source\repos\LabTestApi\LabTestApi\obj\Debug\net9.0\LabTestApi.genruntimeconfig.cache
 C:\Users\luann\source\repos\LabTestApi\LabTestApi\obj\Debug\net9.0\ref\LabTestApi.dll
+C:\Users\luann\source\repos\LabTestApi\LabTestApi\bin\Debug\net9.0\appsettingsjson.Example.json
+C:\Users\luann\source\repos\LabTestApi\LabTestApi\obj\Debug\net9.0\LabTestApi.sourcelink.json
+C:\Users\luann\source\repos\LabTestApi\LabTestApi\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

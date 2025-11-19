@@ -1,10 +1,39 @@
+## Ignore build results
+[Bb]in/
+[Oo]bj/
+
+## Build results
+*.dll
+*.exe
+*.pdb
+*.xml
+
+## NuGet
+[Nn]u[Gg]et/
+*.nupkg
+packages/
+
 ## Visual Studio
 .vs/
 *.user
-*.userosscache
-*.sln.docstates
+*.suo
+*.aps
+*.cache
+*.vbproj.user
 
-## Arquivos de configuração
-appsettings.json
-appsettings.*.json
-!appsettings.Example.json
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+
+## OS
+Thumbs.db
+.DS_Store
+
+## Logs
+*.log
+logs/
+
+## Runtime
+appsettings.Development.json
