@@ -16,14 +16,31 @@ namespace LabTestApi.Controllers
 
         // GET /user?email=...&password=...
         [HttpGet(Name = "GetRechargeTower")]
-        public async Task<IActionResult> Get(string email, string password)
+        public async Task<IActionResult> Get(string email = null, string password = null)
         {
             try
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-                if (user == null)
-                    return NotFound("Usuário não encontrado.");
-                return Ok(user);
+
+                if (email == null && password != null)
+                {
+                    var user = await _context.Users.FirstOrDefaultAsync(u => u.Password == password);
+                    return Ok(user);
+                }
+
+                if (email != null && password == null)
+                {
+                    var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+                    return Ok(user);
+                }
+
+                if (email != null && password != null)
+                {
+                    var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+                    return Ok(user);
+                }
+
+                var users = await _context.Users.ToListAsync();
+                return Ok(users);
             }
             catch (Exception exception)
             {
