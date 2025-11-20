@@ -36,7 +36,7 @@ namespace LabTestApi.Controllers
                  var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
                  return user == null ? Unauthorized("Credenciais inválidas") : Ok(user);
              }
-                  return BadRequest("Parâmetros inválidos");
+                 return BadRequest("Usuário inválido");
         }
  
         
