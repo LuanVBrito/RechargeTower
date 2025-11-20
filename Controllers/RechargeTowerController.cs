@@ -18,35 +18,28 @@ namespace LabTestApi.Controllers
         [HttpGet(Name = "GetRechargeTower")]
         public async Task<IActionResult> Get(string email = null, string password = null)
         {
-            try
-            {
-
-                if (email == null && password != null)
-                {
-                    var user = await _context.Users.FirstOrDefaultAsync(u => u.Password == password);
-                    return Ok(user);
-                }
-
-                if (email != null && password == null)
-                {
-                    var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-                    return Ok(user);
-                }
-
-                if (email != null && password != null)
-                {
-                    var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-                    return Ok(user);
-                }
-
-                var users = await _context.Users.ToListAsync();
-                return Ok(users);
-            }
-            catch (Exception exception)
-            {
-                return Ok(exception.Message);
-            }
+            // Busca sem critérios - retorna todos os usuários
+             if (email == null && password == null)
+             {
+                 var users = await _context.Users.ToListAsync();
+                 return Ok(users);
+             }
+                // Busca apenas por email
+             if (email != null && password == null)
+             {
+                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+                 return user == null ? NotFound("Usuário não encontrado") : Ok(user);
+             }
+              // Busca por email e password (login)
+             if (email != null && password != null)
+             {
+                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+                 return user == null ? Unauthorized("Credenciais inválidas") : Ok(user);
+             }
+                  return BadRequest("Parâmetros inválidos");
         }
+ 
+        
 
         // POST /user
         [HttpPost]

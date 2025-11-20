@@ -20,6 +20,22 @@
     ]
   },
   {
+    "ContainingType": "TorresController",
+    "Method": "CreateTorre",
+    "RelativePath": "api/Torres",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torre",
+        "Type": "Torre",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "LabTestApi.Controllers.RechargeTowerController",
     "Method": "Get",
     "RelativePath": "RechargeTower",

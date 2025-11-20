@@ -12,10 +12,27 @@ public class TorresController : ControllerBase
         _context = context;
     }
 
+    //Get lista de torres
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Torre>>> Get()
     {
         return await _context.Torres.ToListAsync();
     }
+
+    //Post torre
+    [HttpPost]
+    public async Task<ActionResult> CreateTorre([FromBody] Torre torre)
+    {
+        if (torre == null)
+            return BadRequest("Torre inválida.");
+        if (string.IsNullOrEmpty(torre.Nome) || string.IsNullOrEmpty(torre.Localizacao))
+                return BadRequest("Nome e Localização são obrigatórios.");
+        _context.Torres.Add(torre);
+        await _context.SaveChangesAsync();
+
+        return Ok(torre);
+    }
+
+
 }
 
