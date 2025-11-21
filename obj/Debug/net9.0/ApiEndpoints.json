@@ -61,7 +61,7 @@
   {
     "ContainingType": "LabTestApi.Controllers.RechargeTowerController",
     "Method": "Delete",
-    "RelativePath": "RechargeTower/id",
+    "RelativePath": "RechargeTower/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -69,7 +69,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -107,6 +107,22 @@
       {
         "Name": "torre",
         "Type": "Tower",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LabTestApi.Controllers.TowerNameController",
+    "Method": "Delete",
+    "RelativePath": "TowerName/{nome}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nome",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

@@ -103,9 +103,7 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/RechargeTower/id": {
+      },
       "delete": {
         "tags": [
           "RechargeTower"
@@ -113,7 +111,8 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -178,6 +177,28 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TowerName/{nome}": {
+      "delete": {
+        "tags": [
+          "TowerName"
+        ],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -264,6 +285,18 @@
           "localizacao": {
             "minLength": 1,
             "type": "string"
+          },
+          "ultimaManutencao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "horarioPico": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
