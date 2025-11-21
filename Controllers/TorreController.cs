@@ -32,21 +32,6 @@ public class TorresController : ControllerBase
 
         return Ok(torre);
     }
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Torre UpdatedTorre)
-    {
-        if (id != UpdatedTorre.Id)
-            return BadRequest("Id da torre não corresponde.");
-
-        var torre = await _context.Torres.FindAsync(id);
-
-        if (torre == null)
-            return NotFound();
-
-        torre.Nome = updatedTorres.Nome;
-
-
-    }
 
 }
 
