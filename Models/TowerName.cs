@@ -15,6 +15,5 @@ public class TowerName
     [Required]
     public string Localizacao { get; set; }
 
-    [Required]
-    public DateTime Ultimamanutencao? { get; set; }
+    public DateTime? Ultimamanutencao { get; set; }
 }
