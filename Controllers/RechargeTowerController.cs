@@ -77,7 +77,7 @@ namespace LabTestApi.Controllers
         }
 
         //Delete
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var user = await _context.Users.FindAsync(id);
