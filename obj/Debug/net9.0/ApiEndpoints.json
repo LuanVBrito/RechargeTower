@@ -1,41 +1,5 @@
 [
   {
-    "ContainingType": "TorresController",
-    "Method": "Get",
-    "RelativePath": "api/Torres",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Torre, LabTestApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "TorresController",
-    "Method": "CreateTorre",
-    "RelativePath": "api/Torres",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "torre",
-        "Type": "Torre",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "LabTestApi.Controllers.RechargeTowerController",
     "Method": "Get",
     "RelativePath": "RechargeTower",
@@ -111,24 +75,42 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "LabTestApi.Controllers.TestController",
+    "ContainingType": "LabTestApi.Controllers.TowerNameController",
     "Method": "Get",
-    "RelativePath": "Test",
+    "RelativePath": "TowerName",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
+        "Name": "nome",
         "Type": "System.String",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "IsRequired": false
+      },
+      {
+        "Name": "localizacao",
+        "Type": "System.String",
+        "IsRequired": false
       }
-    ]
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "GetTowerName"
+  },
+  {
+    "ContainingType": "LabTestApi.Controllers.TowerNameController",
+    "Method": "Post",
+    "RelativePath": "TowerName",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "torre",
+        "Type": "Tower",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "LabTestApi.Controllers.UserController",

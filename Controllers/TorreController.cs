@@ -1,37 +1,97 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-[ApiController]
-[Route("api/[controller]")]
-public class TorresController : ControllerBase
+namespace LabTestApi.Controllers
 {
-    private readonly AppDbContext _context;
-
-    public TorresController(AppDbContext context)
+    [ApiController]
+    [Route("[controller]")]
+    public class TowerNameController : ControllerBase
     {
-        _context = context;
+        private readonly AppDbContext _context;
+
+        public TowerNameController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet(Name = "GetTowerName")]
+        public async Task<IActionResult> Get(string nome = null, string localizacao = null)
+        {
+             // Busca sem critérios - retorna todas as torres
+             if (nome == null && localizacao == null)
+             {
+                 var torres = await _context.Torres.ToListAsync();
+                 return Ok(torres);
+             }
+                // Busca apenas por nome
+             if (nome != null && localizacao == null)
+             {
+                 var tower = await _context.Torres.FirstOrDefaultAsync(t => t.Nome == nome);
+                 return tower == null ? NotFound("Torre não encontrada") : Ok(tower);
+             }
+              // Busca por nome e localizacao
+             if (nome != null && localizacao != null)
+             {
+                 var tower = await _context.Torres.FirstOrDefaultAsync(t => t.Nome == nome && t.Localizacao == localizacao);
+                 return tower == null ? NotFound("Torre não encontrada") : Ok(tower);
+             }
+                 return BadRequest("Torre inválida");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Tower torre)
+        {
+            try
+            {
+                if (torre == null)
+                    return BadRequest("Dados da torre inválidos");
+
+                // Validação básica
+                if (string.IsNullOrWhiteSpace(torre.Nome))
+                    return BadRequest("Nome da torre é obrigatório");
+
+                if (string.IsNullOrWhiteSpace(torre.Localizacao))
+                    return BadRequest("Localização da torre é obrigatória");
+
+                // Verificar se já existe uma torre com o mesmo nome
+                var torreExistente = await _context.Torres
+                    .FirstOrDefaultAsync(t => t.Nome == torre.Nome);
+
+                if (torreExistente != null)
+                    return Conflict("Já existe uma torre com este nome");
+
+                _context.Torres.Add(torre);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(Get), new { nome = torre.Nome }, torre);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao criar torre: {ex.Message}");
+            }
+        }
+        [HttpDelete("{nome}")]
+        public async Task<IActionResult> Delete(string nome)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(nome))
+                    return BadRequest("Nome da torre é obrigatório");
+
+                var torre = await _context.Torres
+                    .FirstOrDefaultAsync(t => t.Nome == nome);
+
+                if (torre == null)
+                    return NotFound("Torre não encontrada");
+
+                _context.Torres.Remove(torre);
+                await _context.SaveChangesAsync();
+
+                return Ok($"Torre {nome} removida com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao remover torre: {ex.Message}");
+            }
+        }
     }
-
-    //Get lista de torres
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Torre>>> Get()
-    {
-        return await _context.Torres.ToListAsync();
-    }
-
-    //Post torre
-    [HttpPost]
-    public async Task<ActionResult> CreateTorre([FromBody] Torre torre)
-    {
-        if (torre == null)
-            return BadRequest("Torre inválida.");
-        if (string.IsNullOrEmpty(torre.Nome) || string.IsNullOrEmpty(torre.Localizacao))
-                return BadRequest("Nome e Localização são obrigatórios.");
-        _context.Torres.Add(torre);
-        await _context.SaveChangesAsync();
-
-        return Ok(torre);
-    }
-
 }
-

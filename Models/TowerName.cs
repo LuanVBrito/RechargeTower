@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("torres")]
-public class Tower
+[Table("TowerNames")]
+public class TowerName
 {
     [Key]
 
