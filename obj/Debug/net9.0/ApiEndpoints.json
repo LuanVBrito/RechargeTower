@@ -115,14 +115,14 @@
   {
     "ContainingType": "LabTestApi.Controllers.TowerNameController",
     "Method": "Delete",
-    "RelativePath": "TowerName/{nome}",
+    "RelativePath": "TowerName/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "nome",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

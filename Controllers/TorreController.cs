@@ -69,16 +69,16 @@ namespace LabTestApi.Controllers
                 return StatusCode(500, $"Erro interno ao criar torre: {ex.Message}");
             }
         }
-        [HttpDelete("{nome}")]
-        public async Task<IActionResult> Delete(string nome)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(nome))
-                    return BadRequest("Nome da torre é obrigatório");
+                if (id <= 0)
+                    return BadRequest("ID da torre é obrigatório e deve ser maior que zero");
 
                 var torre = await _context.Torres
-                    .FirstOrDefaultAsync(t => t.Nome == nome);
+                    .FirstOrDefaultAsync(t => t.Id == id);
 
                 if (torre == null)
                     return NotFound("Torre não encontrada");
@@ -86,7 +86,7 @@ namespace LabTestApi.Controllers
                 _context.Torres.Remove(torre);
                 await _context.SaveChangesAsync();
 
-                return Ok($"Torre {nome} removida com sucesso");
+                return Ok($"Torre com ID {id} removida com sucesso");
             }
             catch (Exception ex)
             {

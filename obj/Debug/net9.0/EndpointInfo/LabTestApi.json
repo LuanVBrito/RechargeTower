@@ -184,18 +184,19 @@
         }
       }
     },
-    "/TowerName/{nome}": {
+    "/TowerName/{id}": {
       "delete": {
         "tags": [
           "TowerName"
         ],
         "parameters": [
           {
-            "name": "nome",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
