@@ -14,27 +14,23 @@ namespace LabTestApi.Controllers
             _context = context;
         }
 
-        // GET /user?email=...&password=...
-        [HttpGet(Name = "GetRechargeTower")]
+        [HttpGet]
         public async Task<IActionResult> Get(string email = null, string password = null)
         {
-            // Busca sem critérios - retorna todos os usuários
              if (email == null && password == null)
              {
-                 var users = await _context.Users.ToListAsync();
-                 return Ok(users);
+                 var rechargetowers = await _context.Rechargetowers.ToListAsync();
+                 return Ok(rechargetowers);
              }
-                // Busca apenas por email
              if (email != null && password == null)
              {
                  var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
                  return user == null ? NotFound("Usuário não encontrado") : Ok(user);
              }
-              // Busca por email e password (login)
              if (email != null && password != null)
              {
                  var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-                 return user == null ? Unauthorized("Credenciais inválidas") : Ok(user);
+                 return user == null ? Unauthorized("Usuário inválido") : Ok(user);
              }
                  return BadRequest("Usuário inválido");
         }

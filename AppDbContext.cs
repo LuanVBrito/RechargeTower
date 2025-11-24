@@ -7,6 +7,6 @@ public class AppDbContext : DbContext
     {
     }
 
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> Rechargetowers { get; set; }
     public DbSet<Tower> Torres { get; set; }
 }
