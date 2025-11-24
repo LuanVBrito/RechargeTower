@@ -59,7 +59,7 @@ namespace LabTestApi.Controllers
 
         //PUt
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, User updatedUser)
+        public async Task<IActionResult> Put(int id, User updatedUser)
         {
             if (id != updatedUser.Id)
                 return BadRequest("Id do usuário não corresponde.");

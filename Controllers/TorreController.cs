@@ -93,5 +93,36 @@ namespace LabTestApi.Controllers
                 return StatusCode(500, $"Erro interno ao remover torre: {ex.Message}");
             }
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] Tower torreAtualizada)
+        {
+            try
+            {
+                if (id <= 0)
+                    return BadRequest("ID da torre é obrigatório e deve ser maior que zero");
+
+                if (torreAtualizada == null)
+                    return BadRequest("Dados da torre são obrigatórios");
+
+                var torreExistente = await _context.Torres
+                    .FirstOrDefaultAsync(t => t.Id == id);
+
+                if (torreExistente == null)
+                    return NotFound("Torre não encontrada");
+
+                // Atualiza apenas os campos permitidos
+                torreExistente.Nome = torreAtualizada.Nome;
+                torreExistente.Localizacao = torreAtualizada.Localizacao;
+                // Continue com outras propriedades que podem ser atualizadas...
+
+                await _context.SaveChangesAsync();
+
+                return Ok($"Torre com ID {id} atualizada com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno ao atualizar torre: {ex.Message}");
+            }
+        }
     }
 }
